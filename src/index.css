@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.flexRow{
+    @apply flex  items-center
+}
+.info{
+    @apply font-semibold
+}
+
+.icons{
+    @apply text-white text-xl cursor-pointer
+} 
