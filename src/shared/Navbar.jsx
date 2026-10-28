@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaUser } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
 import { MdMenu } from "react-icons/md";
 import { Link, NavLink } from "react-router-dom";
+import ProductContext from "../context/ProductProvider";
 
 function Navbar() {
   const [showmenu, setShowmenu] = useState(false);
+  const {cartCount} = useContext(ProductContext)
   const navs = [
     {
       name: "About",
@@ -29,7 +31,7 @@ function Navbar() {
     },
   ];
   return (
-    <>
+    <div className="sticky top-0 left-0 z-50">
       {/* big */}
       <div className="hidden lg:block">
         <div className=" h-28 flexRow justify-between p-4 bg-black">
@@ -58,10 +60,10 @@ function Navbar() {
             <span className="icon">
               <FaUser />
             </span>
-            <span className="icon relative">
+            <Link to={"/checkout"} className="icon relative">
               <FaCartShopping />
-              <span className="absolute top-[-20px] right-[-10px]">0</span>
-            </span>
+              <span className="absolute top-[-20px] right-[-10px]">{cartCount}</span>
+            </Link>
           </div>
         </div>
       </div>
@@ -75,10 +77,10 @@ function Navbar() {
           Smart
         </Link>
         <div className="flex justify-between items-center gap-6">
-          <span className="icon relative text-white">
+          <Link to={"/checkout"} className="icon relative text-white">
             <FaCartShopping />
-            <span className="absolute top-[-20px] right-[-10px]">0</span>
-          </span>
+            <span className="absolute top-[-20px] right-[-10px]">{cartCount}</span>
+          </Link>
           <span
             onClick={() => setShowmenu((prv) => !prv)}
             className="icons block lg:hidden  "
@@ -103,7 +105,7 @@ function Navbar() {
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

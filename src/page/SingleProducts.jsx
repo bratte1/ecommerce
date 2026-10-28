@@ -5,7 +5,7 @@ import Layout from "../shared/Layout";
 
 function SingleProducts() {
   const { id } = useParams();
-  const { products } = useContext(ProductContext);
+  const { products, AddToCart } = useContext(ProductContext);
 
   const [singleProduct, setSingleProduct] = useState(null);
   const [defaultSize, setDefaultSize] = useState(null);
@@ -69,12 +69,6 @@ function SingleProducts() {
 
   const productPrice = Number(price) || 0;
 
-  const handleAddToCart = () => {
-    if (sizes.length > 0 && !defaultSize) return;
-
-    // Connect your existing cart function here.
-    // Pass singleProduct, defaultSize, and quantity.
-  };
 
   return (
     <Layout>
@@ -205,7 +199,7 @@ function SingleProducts() {
               <button
                 type="button"
                 disabled={sizes.length > 0 && !defaultSize}
-                onClick={handleAddToCart}
+                onClick={()=> AddToCart(singleProduct, quantity, defaultSize)}
                 className="mt-8 w-full rounded-xl bg-black px-6 py-4 text-sm font-semibold text-white transition hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-gray-300 disabled:cursor-not-allowed disabled:bg-gray-300"
               >
                 Add to Cart
